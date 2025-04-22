@@ -10,7 +10,9 @@ const appConfig = () => ({
   DATABASE_USERNAME: getEnv('DATABASE_USERNAME'),
   DATABASE_PORT: getEnv('DATABASE_PORT'),
   DATABASE_TYPE: getEnv('DATABASE_TYPE'),
-  DATABASE_NAME: getEnv('DATABASE_NAME')
+  DATABASE_NAME: getEnv('DATABASE_NAME'),
+
+  FRONTEND_ORIGIN: getEnv('FRONTEND_ORIGIN')
 })
 
 export const config = appConfig()
