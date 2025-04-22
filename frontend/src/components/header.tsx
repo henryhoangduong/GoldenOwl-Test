@@ -1,7 +1,7 @@
 import React from 'react'
 import { SidebarTrigger } from './ui/sidebar'
 import { AvatarImage, Avatar, AvatarFallback } from './ui/avatar'
-import { Bell, BellDot } from 'lucide-react'
+import { BellDot } from 'lucide-react'
 
 const Header = () => {
   return (
