@@ -10,7 +10,7 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-app.get('/test', async (req: Request, res: Response) => {
+app.get('/', async (req: Request, res: Response) => {
   res.json({ message: 'hello world' })
 })
 app.use(
