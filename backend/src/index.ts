@@ -1,3 +1,4 @@
+import 'reflect-metadata'
 import swaggerUi from 'swagger-ui-express'
 import swaggerJsdoc from 'swagger-jsdoc'
 import express, { Request, Response } from 'express'
