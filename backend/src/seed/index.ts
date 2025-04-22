@@ -23,15 +23,15 @@ const seed = async () => {
       })
       await AppDataSource.manager.save(user)
       const result = AppDataSource.manager.create(Result, {
-        toan: parseInt(results[i].toan),
-        ngu_van: parseInt(results[i].ngu_van),
-        ngoai_ngu: parseInt(results[i].ngoai_ngu),
-        vat_li: parseInt(results[i].vat_li),
-        hoa_hoc: parseInt(results[i].hoa_hoc),
-        sinh_hoc: parseInt(results[i].sinh_hoc),
-        lich_su: parseInt(results[i].lich_su),
-        dia_li: parseInt(results[i].dia_li),
-        gdcd: parseInt(results[i].gdcd),
+        toan: parseFloat(results[i].toan),
+        ngu_van: parseFloat(results[i].ngu_van),
+        ngoai_ngu: parseFloat(results[i].ngoai_ngu),
+        vat_li: parseFloat(results[i].vat_li),
+        hoa_hoc: parseFloat(results[i].hoa_hoc),
+        sinh_hoc: parseFloat(results[i].sinh_hoc),
+        lich_su: parseFloat(results[i].lich_su),
+        dia_li: parseFloat(results[i].dia_li),
+        gdcd: parseFloat(results[i].gdcd),
         ma_ngoai_ngu: results[i].ma_ngoai_ngu,
         user
       })
