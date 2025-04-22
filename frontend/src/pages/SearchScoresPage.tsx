@@ -6,49 +6,104 @@ import { getResultByStudentSBD } from '@/services'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Loader2 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
+import { useState } from 'react'
+import ResultCard from '@/components/ResultCard'
 const formSchema = z.object({
   registrationNumber: z.string().min(1, 'Mã số báo danh không được để trống')
 })
 type FormValues = z.infer<typeof formSchema>
 
+const colorArrays = ['#5E89ED', '#EF6EA5', '#52C470', '#F2D147']
+const iconArrays = [
+  'https://cdn-icons-png.flaticon.com/512/5078/5078755.png',
+  'https://cdn-icons-png.flaticon.com/512/92/92065.png',
+  'https://cdn-icons-png.flaticon.com/512/6301/6301073.png',
+  'https://cdn-icons-png.flaticon.com/512/6347/6347053.png'
+]
+const nameMapping: { [key: string]: string } = {
+  toan: 'Toán',
+  ngu_van: 'Ngữ văn',
+  ngoai_ngu: 'Ngoại ngữ',
+  vat_li: 'Vật lí',
+  hoa_hoc: 'Hoá học',
+  sinh_hoc: 'Sinh học',
+  lich_su: 'Lịch sử',
+  dia_li: 'Địa lí',
+  gdcd: 'Giáo dục công dân',
+  ma_ngoai_ngu: 'Ngoại Ngữ'
+}
+
 const SearchScoresPage = () => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema)
   })
+  const [results, setResults] = useState<{ [key: string]: string }>({})
   const onSubmit = async (data: FormValues) => {
-    console.log(data)
     try {
       const result = await getResultByStudentSBD(data.registrationNumber)
-      console.log('📄 Result:', result)
+      console.log(result)
+      setResults(result)
     } catch (error) {
       console.error('❌ Error fetching result:', error)
     }
   }
   return (
     <div className='w-full'>
-      <div className='w-1/2 mt-10 relative left-1/2 transform -translate-x-1/2 top-[100px]'>
+      <div className=' mt-10 ml-5'>
         <Form {...form}>
-          <form className='space-y-8'>
+          <form className='space-y-8 flex flex-row items-center gap-2 '>
             <FormField
               control={form.control}
               name='registrationNumber'
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Registration Number</FormLabel>
+                  <FormLabel className='text-muted-foreground font-medium'>Số báo danh </FormLabel>
                   <FormControl>
-                    <Input placeholder='shadcn' {...field} {...form.register('registrationNumber')} />
+                    <Input placeholder='01000001' {...field} {...form.register('registrationNumber')} />
                   </FormControl>
-                  <FormDescription>This is your public display name.</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <Button onClick={form.handleSubmit(onSubmit)} type='submit' disabled={form.formState.isSubmitting}>
-              {form.formState.isSubmitting ? <Loader2 className='animate-spin' /> : 'Submit'}
+            <Button
+              className='mb-3'
+              onClick={form.handleSubmit(onSubmit)}
+              type='submit'
+              disabled={form.formState.isSubmitting}
+            >
+              {form.formState.isSubmitting ? <Loader2 className='animate-spin' /> : 'Tra cứu'}
             </Button>
           </form>
         </Form>
       </div>
+      <div className='p-6'>
+        {Object.keys(results).length > 0 ? (
+          <div className='grid lg:grid-cols-3 gap-2 md:grid-cols-2 sm:grid-cols-1 '>
+            {Object.entries(results).map(([key, value], index) => {
+              const randomColor = Math.floor(Math.random() * colorArrays.length)
+              const randomIcon = Math.floor(Math.random() * iconArrays.length)
+              if (key == 'id' || !value) return
+              return (
+                <ResultCard
+                  key={index}
+                  title={nameMapping[key as string]}
+                  value={value}
+                  bgColor={colorArrays[randomColor]}
+                  iconUrl={iconArrays[randomIcon]}
+                />
+              )
+            })}
+          </div>
+        ) : (
+          <div className='w-full items-center justify-center flex flex-col mt-5 gap-4'>
+            <img className='w-[30%]' src='src/assets/undraw_working-together_r43a.svg' alt='' />
+            <p className='text-xl font-medium text-muted-foreground'>
+              Hãy nhập thông tin số báo danh để tra cứu kết quả
+            </p>
+          </div>
+        )}
+      </div>
+      <div className='h-10' />
     </div>
   )
 }

@@ -11,7 +11,7 @@ const getResultByStudentSBD = async (sbd: string) => {
   try {
     const result = await axiosClient.get(`result/${sbd}`)
     if (result) {
-      console.log(result)
+      return result.data
     }
   } catch (error) {
     console.log(error)
