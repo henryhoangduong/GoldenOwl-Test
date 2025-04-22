@@ -1,4 +1,3 @@
-import React from 'react'
 import { SidebarTrigger } from './ui/sidebar'
 import { AvatarImage, Avatar, AvatarFallback } from './ui/avatar'
 import { BellDot } from 'lucide-react'
