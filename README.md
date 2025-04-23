@@ -1,7 +1,7 @@
 # 🧑‍💻 Web Developer Intern Assignment
 
 ### 🔗 Demo Link  
-[Live Demo](https://your-demo-link.com) — Check out the live version of the project!
+https://golden-owl-test.vercel.app/ — Check out the live version of the project!
 
 <br/>
 
@@ -111,6 +111,9 @@ cd backend
 
 # Install dependencies
 npm install
+
+# Seeding data
+npm run seed
 
 # Run development server
 npm run dev
