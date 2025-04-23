@@ -7,7 +7,7 @@
     "build": "tsc && cp package.json ./dist",
     "start": "node dist/index.js",
     "seed":"npx ts-node-dev --files src/seed/index.ts",
-      "lint": "eslint ."
+    "lint": "eslint ."
 
   },
   "keywords": [],
@@ -15,7 +15,6 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
-    "@types/node": "^22.14.1",
     "cors": "^2.8.5",
     "csv-parser": "^3.2.0",
     "dotenv": "^14.0.0",
@@ -31,6 +30,7 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
+    "@types/node": "^22.14.1",
     "@eslint/js": "^9.25.1",
     "@types/cors": "^2.8.17",
     "@types/express": "^5.0.1",
