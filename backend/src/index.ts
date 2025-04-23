@@ -4,6 +4,7 @@ import { config } from './config/app.config'
 import { AppDataSource } from './config/database.config'
 import { resultRouter } from './routes/result.routes'
 import cors from 'cors'
+import { analyticRouter } from './routes/analytic.route'
 
 const app = express()
 
@@ -19,6 +20,7 @@ app.use(
   })
 )
 app.use('/api/result', resultRouter)
+app.use('/api/analytic', analyticRouter)
 
 app.listen(config.PORT, async () => {
   console.log(`Server listening on port ${config.PORT} in ${config.NODE_ENV}`)

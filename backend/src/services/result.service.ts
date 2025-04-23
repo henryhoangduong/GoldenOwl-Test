@@ -1,22 +1,32 @@
+import { Repository } from 'typeorm'
 import { AppDataSource } from '../config/database.config'
 import { Result } from '../models/result.model'
 import { User } from '../models/user.model'
 
-export const getResultByStudentSBDService = async (sbd: string) => {
-  const userRepository = AppDataSource.getRepository(User)
-  const resultRepository = AppDataSource.getRepository(Result)
-  const user = await userRepository.findOne({
-    where: {
-      sbd: sbd
-    }
-  })
-  if (!user) {
-    throw new Error('User not found')
+export class ResultService {
+  private userRepository: Repository<User>
+  private resultRepository: Repository<Result>
+
+  constructor(
+    userRepository: Repository<User> = AppDataSource.getRepository(User),
+    resultRepository: Repository<Result> = AppDataSource.getRepository(Result)
+  ) {
+    this.userRepository = userRepository
+    this.resultRepository = resultRepository
   }
-  const result = await resultRepository.findOne({
-    where: {
-      user: user
+  public async getResultByStudentSBD(sbd: string) {
+    const user = await this.userRepository.findOne({
+      where: { sbd }
+    })
+
+    if (!user) {
+      throw new Error('User not found')
     }
-  })
-  return result
+
+    const result = await this.resultRepository.findOne({
+      where: { user }
+    })
+
+    return result
+  }
 }

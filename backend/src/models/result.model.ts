@@ -25,7 +25,7 @@ export class Result {
   dia_li: number
   @Column({ type: 'float', nullable: true })
   gdcd: number
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   ma_ngoai_ngu: string
 
   @OneToOne(() => User)

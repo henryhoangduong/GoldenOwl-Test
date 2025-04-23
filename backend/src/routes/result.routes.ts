@@ -1,5 +1,6 @@
 import { Router } from 'express'
-import { getResultByStudentSBDController } from '../controllers/result.controller'
 export const resultRouter = Router()
+import { ResultController } from '../controllers/result.controller'
 
-resultRouter.get('/:sbd', getResultByStudentSBDController)
+const resultController = new ResultController()
+resultRouter.get('/:sbd', resultController.getResultBySBD)

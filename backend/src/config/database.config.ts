@@ -13,7 +13,6 @@ export const AppDataSource = new DataSource({
   password: config.DATABASE_PASSWORD,
   database: config.DATABASE_NAME,
   synchronize: true,
-  logging: true,
   entities: [User, Result],
   ssl: true
 })
