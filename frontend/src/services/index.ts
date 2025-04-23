@@ -66,10 +66,22 @@ const getScoreDistributionBySubject = async (subject: string) => {
   }
   return []
 }
+const getTopStudentBySubject = async (subject: string, limit: number) => {
+  try {
+    const result = await axiosClient.get(`analytic/top-students-by-subject?subject=${subject}&limit=${limit}`)
+    if (result) {
+      return result.data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return []
+}
 export {
   getResultByStudentSBD,
   getOverall,
   getBestStudentsGroupA,
   getSubjectPerformance,
-  getScoreDistributionBySubject
+  getScoreDistributionBySubject,
+  getTopStudentBySubject
 }

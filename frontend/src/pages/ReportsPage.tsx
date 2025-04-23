@@ -1,10 +1,13 @@
 import { DonutChart } from '@/components/chart/DonutChart'
 import LineChart_ from '@/components/chart/LineChart'
 import SubjectSelect from '@/components/SubjectSelect'
-import { getSubjectPerformance } from '@/services'
+import { getSubjectPerformance, getTopStudentBySubject } from '@/services'
 import { Loader2 } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { getScoreDistributionBySubject } from '@/services/index'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 const COLORS1 = ['#5A6ACF', '#8593ED', '#C7CEFF', '#E0E4FF']
 
 const chartDataReshape = (data: { data: { [key: string]: string } }) => {
@@ -19,6 +22,8 @@ const ReportsPage = () => {
   const [data, setData] = useState<{ [key: string]: { [key: string]: string } }>({})
   // data for line chart
   const [scoreDist, setScoreDist] = useState([])
+  //data for top studen table
+  const [topStudents, setTopStudents] = useState<{ [key: string]: string }[]>([])
 
   const [loading, setLoading] = useState(false)
   const [subject, setSubject] = useState('toan')
@@ -28,11 +33,15 @@ const ReportsPage = () => {
       setLoading(true)
       const result = await getSubjectPerformance()
       const getScoreDistributionBySubjectData = await getScoreDistributionBySubject(subject)
+      const topStudentsBySubject = await getTopStudentBySubject(subject, 5)
       if (result) {
         setData(result)
       }
       if (getScoreDistributionBySubjectData.length > 0) {
         setScoreDist(getScoreDistributionBySubjectData)
+      }
+      if (topStudentsBySubject.length > 0) {
+        setTopStudents(topStudentsBySubject)
       }
       setLoading(false)
     }
@@ -43,14 +52,19 @@ const ReportsPage = () => {
     if (data && subject in data) {
       setDataBySubject(chartDataReshape({ data: data[subject] }))
 
-      const fetchScoreDist = async () => {
+      const fetchData = async () => {
         const getScoreDistributionBySubjectData = await getScoreDistributionBySubject(subject)
+        const topStudentsBySubject = await getTopStudentBySubject(subject, 5)
+
         if (getScoreDistributionBySubjectData.length > 0) {
           setScoreDist(getScoreDistributionBySubjectData)
         }
+        if (topStudentsBySubject.length > 0) {
+          setTopStudents(topStudentsBySubject)
+        }
       }
 
-      fetchScoreDist()
+      fetchData()
     }
   }, [data, subject])
 
@@ -65,21 +79,83 @@ const ReportsPage = () => {
         <p className='text-[24px] font-[500px]'> Hello, superstar teacher 🌟</p>
         <SubjectSelect value={subject} onSelect={handleSelectSubject} />
       </div>
-      {/* 2 columns divided by a vertical line */}
-      <div className='flex md:flex-row flex-col gap-2  items-start mt-10 p-6'>
-        {/* Column 1 */}
-        <div className='md:w-2/5 w-full md:border-r-1'>
-          <div className='w-full flex flex-col gap-2'>
-            <h3 className='text-[14px] font-[500px] relative  text-left ml-10'>Subject Performance Breakdown</h3>
-            <DonutChart colorArray={COLORS1} data={dataBySubject} />
-          </div>
+      <div className='sm:grid sm:grid-cols-3 gap-2  items-start mt-10 p-6'>
+        {/* Donut chart */}
+        <div className='w-full flex flex-col gap-2'>
+          <h3 className='text-[14px] font-[500px] relative  text-left ml-10'>Subject Performance Breakdown</h3>
+          <DonutChart colorArray={COLORS1} data={dataBySubject} />
         </div>
-        {/* Column 2 */}
-        <div className='w-full'>
-          <div className='w-full'>
-            <h3 className='text-[14px] font-[500px] relative ml-10  text-left'>Score Distribution</h3>
-            <div className='mt-10 w-full '>{scoreDist.length > 0 && <LineChart_ data={scoreDist} />}</div>
-          </div>
+
+        {/* Line charts */}
+        <div className='w-full col-span-2'>
+          <h3 className='text-[14px] font-[500px] relative ml-10  text-left'>Score Distribution</h3>
+          <div className='mt-10 w-full '>{scoreDist.length > 0 && <LineChart_ data={scoreDist} />}</div>
+        </div>
+        {/* Best result student */}
+        <div className='p-6'>
+          <Card className='flex flex-col p-6 w-full'>
+            <CardHeader>
+              <CardTitle>🚀 Top Student </CardTitle>
+              <CardDescription>Student with the best performance</CardDescription>
+            </CardHeader>
+            <div className='w-full flex flex-col items-center'>
+              <Avatar className='w-[100px] h-[100px]'>
+                <AvatarImage
+                  sizes='100px'
+                  width={200}
+                  height={200}
+                  src='https://mir-s3-cdn-cf.behance.net/project_modules/1400/8394f798931623.5ee79b6a909ea.jpg'
+                />
+                <AvatarFallback>CN</AvatarFallback>
+              </Avatar>
+              <div className='mt-5 flex flex-col gap-2 w-full'>
+                <div className='flex flex-row justify-between'>
+                  <p className='text-muted-foreground'>Registration Number</p>
+                  <span>{topStudents[0].sbd}</span>
+                </div>
+                <div className='flex flex-row justify-between'>
+                  <p className='text-muted-foreground'>Grade</p>
+                  <span>{topStudents[0][subject]}</span>
+                </div>
+              </div>
+            </div>
+          </Card>{' '}
+        </div>
+
+        {/* Top student tables */}
+        <div className='p-6 col-span-2'>
+          <Card className='shadow-none col-span-2 lg:col-span-3 xl:col-span-4'>
+            <CardHeader>
+              <CardTitle>☝ Top students </CardTitle>
+              <CardDescription>Students ranking by subject</CardDescription>
+            </CardHeader>
+            <CardContent>
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    {' '}
+                    <TableHead className='text-center'>Registration number</TableHead>
+                    <TableHead className='text-center'>Grade</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
+                  {topStudents.map((item, index) => {
+                    console.log(item.sbd)
+                    return (
+                      <TableRow>
+                        <TableCell className='font-medium' key={index}>
+                          {item.sbd && item.sbd} 
+                        </TableCell>
+                        <TableCell className='font-medium' key={index}>
+                          {item[subject]}
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                </TableBody>
+              </Table>
+            </CardContent>
+          </Card>
         </div>
       </div>
       <div className='h-10' />

@@ -112,7 +112,7 @@ export const StudentTableRow = ({
       <TableCell className='hidden sm:table-cell'>{toan} </TableCell>
       <TableCell className='hidden sm:table-cell'>{ly} </TableCell>
       <TableCell className='hidden md:table-cell'>{hoa} </TableCell>
-      <TableCell className='hidden md:table-cell'>{String(dtb).slice(0, 4)} </TableCell>
+      <TableCell>{String(dtb).slice(0, 4)} </TableCell>
     </TableRow>
   )
 }
