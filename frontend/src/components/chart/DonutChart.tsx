@@ -9,6 +9,7 @@ type RenderDoughnutChartProps = {
   data: ChartData[]
   colorArray: string[]
 }
+
 export const DonutChart = ({ data, colorArray }: RenderDoughnutChartProps) => {
   return (
     <ResponsiveContainer width='100%' height={300}>
@@ -24,8 +25,7 @@ export const DonutChart = ({ data, colorArray }: RenderDoughnutChartProps) => {
           stroke='#fff'
           strokeWidth={3}
         >
-          {/* Custom colors for each segment */}
-          {data?.map((entry, index) => <Cell key={`cell-${index}`} fill={colorArray[index % colorArray.length]} />)}
+          {data?.map((_entry, index) => <Cell key={`cell-${index}`} fill={colorArray[index % colorArray.length]} />)}
         </Pie>
         <Tooltip />
         <Legend
