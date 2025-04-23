@@ -95,7 +95,7 @@ const SearchScoresPage = () => {
           </div>
         ) : (
           <div className='w-full items-center justify-center flex flex-col mt-5 gap-4'>
-            <img className='w-[30%]' src='../assets/undraw_working-together_r43a.svg' alt='' />
+            <img className='w-[30%]' src='public/undraw_working-together_r43a.svg' alt='' />
             <p className='text-xl font-medium text-muted-foreground'>
               Hãy nhập thông tin số báo danh để tra cứu kết quả
             </p>
