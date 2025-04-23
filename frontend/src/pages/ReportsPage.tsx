@@ -61,24 +61,24 @@ const ReportsPage = () => {
 
   return (
     <div className='flex flex-col'>
-      <div className='w-ful flex-row flex justify-between items-center p-6'>
+      <div className='w-full md:flex-row flex-col flex justify-between items-center p-6'>
         <p className='text-[24px] font-[500px]'> Hello, superstar teacher 🌟</p>
         <SubjectSelect value={subject} onSelect={handleSelectSubject} />
       </div>
       {/* 2 columns divided by a vertical line */}
-      <div className='flex flex-row gap-2  items-start mt-10'>
+      <div className='flex md:flex-row flex-col gap-2  items-start mt-10 p-6'>
         {/* Column 1 */}
-        <div className='w-1/3 border-r-1'>
+        <div className='md:w-2/5 w-full md:border-r-1'>
           <div className='w-full flex flex-col gap-2'>
             <h3 className='text-[14px] font-[500px] relative  text-left ml-10'>Subject Performance Breakdown</h3>
             <DonutChart colorArray={COLORS1} data={dataBySubject} />
           </div>
         </div>
         {/* Column 2 */}
-        <div>
-          <div className='w-max'>
+        <div className='w-full'>
+          <div className='w-full'>
             <h3 className='text-[14px] font-[500px] relative ml-10  text-left'>Score Distribution</h3>
-            <div className='mt-10'>{scoreDist.length > 0 && <LineChart_ data={scoreDist} />}</div>
+            <div className='mt-10 w-full '>{scoreDist.length > 0 && <LineChart_ data={scoreDist} />}</div>
           </div>
         </div>
       </div>

@@ -15,7 +15,7 @@ const scoreRanges: Record<string, string> = {
   average: '4 - 5.99',
   poor: '< 4'
 }
-
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 const CustomTooltip = ({ active, payload }: any) => {
   if (active && payload && payload.length > 0) {
     const { name, value } = payload[0]
