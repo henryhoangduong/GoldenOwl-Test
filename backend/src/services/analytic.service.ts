@@ -88,7 +88,7 @@ export class AnalyticeService {
     return buckets
   }
   public async getTopStudentBySubject(subject: string, limit: number = 5) {
-    const students = await this.resultRepository
+    const results = await this.resultRepository
       .createQueryBuilder('result')
       .leftJoinAndSelect('result.user', 'user')
       .where(`result.${subject} IS NOT NULL`)
@@ -96,6 +96,8 @@ export class AnalyticeService {
       .limit(limit)
       .getMany()
 
-    return students
+    return results.map((item) => {
+      return { ...item, sbd: item.user.sbd }
+    })
   }
 }
