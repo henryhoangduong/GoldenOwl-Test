@@ -55,4 +55,21 @@ const getSubjectPerformance = async () => {
   return {}
 }
 
-export { getResultByStudentSBD, getOverall, getBestStudentsGroupA, getSubjectPerformance }
+const getScoreDistributionBySubject = async (subject: string) => {
+  try {
+    const result = await axiosClient.get(`analytic/subject-score-distibution/${subject}`)
+    if (result) {
+      return result.data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return []
+}
+export {
+  getResultByStudentSBD,
+  getOverall,
+  getBestStudentsGroupA,
+  getSubjectPerformance,
+  getScoreDistributionBySubject
+}
