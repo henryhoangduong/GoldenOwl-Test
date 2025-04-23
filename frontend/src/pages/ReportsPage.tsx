@@ -144,7 +144,7 @@ const ReportsPage = () => {
                     return (
                       <TableRow>
                         <TableCell className='font-medium' key={index}>
-                          {item.sbd && item.sbd} 
+                          {item.sbd && item.sbd}
                         </TableCell>
                         <TableCell className='font-medium' key={index}>
                           {item[subject]}
