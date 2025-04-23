@@ -111,11 +111,11 @@ const ReportsPage = () => {
               <div className='mt-5 flex flex-col gap-2 w-full'>
                 <div className='flex flex-row justify-between'>
                   <p className='text-muted-foreground'>Registration Number</p>
-                  <span>{topStudents[0].sbd}</span>
+                  <span>{topStudents.length > 0 && topStudents[0].sbd}</span>
                 </div>
                 <div className='flex flex-row justify-between'>
                   <p className='text-muted-foreground'>Grade</p>
-                  <span>{topStudents[0][subject]}</span>
+                  <span>{topStudents.length > 0 && topStudents[0][subject]}</span>
                 </div>
               </div>
             </div>
@@ -139,19 +139,19 @@ const ReportsPage = () => {
                   </TableRow>
                 </TableHeader>
                 <TableBody>
-                  {topStudents.map((item, index) => {
-                    console.log(item.sbd)
-                    return (
-                      <TableRow>
-                        <TableCell className='font-medium' key={index}>
-                          {item.sbd && item.sbd}
-                        </TableCell>
-                        <TableCell className='font-medium' key={index}>
-                          {item[subject]}
-                        </TableCell>
-                      </TableRow>
-                    )
-                  })}
+                  {topStudents.length > 0 &&
+                    topStudents.map((item, index) => {
+                      return (
+                        <TableRow>
+                          <TableCell className='font-medium' key={index}>
+                            {item.sbd && item.sbd}
+                          </TableCell>
+                          <TableCell className='font-medium' key={index}>
+                            {item[subject]}
+                          </TableCell>
+                        </TableRow>
+                      )
+                    })}
                 </TableBody>
               </Table>
             </CardContent>
