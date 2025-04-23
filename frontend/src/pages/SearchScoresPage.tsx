@@ -8,29 +8,11 @@ import { Loader2 } from 'lucide-react'
 import { Input } from '@/components/ui/input'
 import { useState } from 'react'
 import ResultCard from '@/components/ResultCard'
+import { nameMapping, iconArrays, colorArrays } from '@/constants'
 const formSchema = z.object({
   registrationNumber: z.string().min(1, 'Mã số báo danh không được để trống')
 })
 type FormValues = z.infer<typeof formSchema>
-
-const colorArrays = ['#5E89ED', '#EF6EA5', '#52C470', '#F2D147']
-const iconArrays = [
-  'https://cdn-icons-png.flaticon.com/512/5078/5078755.png',
-  'https://cdn-icons-png.flaticon.com/512/92/92065.png',
-  'https://cdn-icons-png.flaticon.com/512/6301/6301073.png',
-  'https://cdn-icons-png.flaticon.com/512/6347/6347053.png'
-]
-const nameMapping: { [key: string]: string } = {
-  toan: 'Toán',
-  ngu_van: 'Ngữ văn',
-  ngoai_ngu: 'Ngoại ngữ',
-  vat_li: 'Vật lí',
-  hoa_hoc: 'Hoá học',
-  sinh_hoc: 'Sinh học',
-  lich_su: 'Lịch sử',
-  dia_li: 'Địa lí',
-  gdcd: 'Giáo dục công dân'
-}
 
 const SearchScoresPage = () => {
   const form = useForm<FormValues>({
@@ -40,7 +22,6 @@ const SearchScoresPage = () => {
   const onSubmit = async (data: FormValues) => {
     try {
       const result = await getResultByStudentSBD(data.registrationNumber)
-      console.log(result)
       setResults(result)
     } catch (error) {
       console.error('❌ Error fetching result:', error)
