@@ -11,7 +11,8 @@ https://golden-owl-test.vercel.app/ — Check out the live version of the projec
   <img src="https://github.com/user-attachments/assets/3209f708-c2d0-4802-9691-390dbec01a33" width="40%"/>
     <img src="https://github.com/user-attachments/assets/a4a0acca-b9cc-4afc-96de-ec8c2850a4df" width="40%"/>
       <img src="https://github.com/user-attachments/assets/51c737b4-ea1d-44bc-993d-c600b6a73b01" width="20%"/>
-        <img src="https://github.com/user-attachments/assets/6f138e3c-60ee-47db-925d-64b488c3a919" width="20%"/>
+      <img src="https://github.com/user-attachments/assets/6f138e3c-60ee-47db-925d-64b488c3a919" width="20%"/>
+      <img src="https://github.com/user-attachments/assets/f298159b-bf84-42f0-8dad-6abd3517433d" width="50%"/>
 </div>
 
 ## 🧠 Project structure
