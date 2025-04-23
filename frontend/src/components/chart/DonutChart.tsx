@@ -9,7 +9,28 @@ type RenderDoughnutChartProps = {
   data: ChartData[]
   colorArray: string[]
 }
+const scoreRanges: Record<string, string> = {
+  excellent: '≥ 8',
+  good: '6 - 7.99',
+  average: '4 - 5.99',
+  poor: '< 4'
+}
 
+const CustomTooltip = ({ active, payload }: any) => {
+  if (active && payload && payload.length > 0) {
+    const { name, value } = payload[0]
+    return (
+      <div style={{ background: '#fff', padding: 10, border: '1px solid #ccc', borderRadius: 4 }}>
+        <p>
+          <strong>{name}</strong>
+        </p>
+        <p>Students: {value}</p>
+        <p>Score Range: {scoreRanges[name] ?? 'N/A'}</p>
+      </div>
+    )
+  }
+  return null
+}
 export const DonutChart = ({ data, colorArray }: RenderDoughnutChartProps) => {
   return (
     <ResponsiveContainer width='100%' height={300}>
@@ -27,7 +48,8 @@ export const DonutChart = ({ data, colorArray }: RenderDoughnutChartProps) => {
         >
           {data?.map((_entry, index) => <Cell key={`cell-${index}`} fill={colorArray[index % colorArray.length]} />)}
         </Pie>
-        <Tooltip />
+        <Tooltip content={<CustomTooltip />} />
+
         <Legend
           iconType='circle'
           layout='vertical'
