@@ -35,7 +35,8 @@ export class AnalyticeService {
 
     return results.map((result) => ({
       ...result,
-      average: (result.toan + result.vat_li + result.hoa_hoc) / 3
+      average: (result.toan + result.vat_li + result.hoa_hoc) / 3,
+      sbd: result.user.sbd
     }))
   }
   public async subjectPerformance() {
