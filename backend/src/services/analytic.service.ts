@@ -38,4 +38,52 @@ export class AnalyticeService {
       average: (result.toan + result.vat_li + result.hoa_hoc) / 3
     }))
   }
+  public async subjectPerformance() {
+    const subjects = ['toan', 'vat_li', 'hoa_hoc', 'sinh_hoc', 'ngoai_ngu', 'lich_su', 'dia_li', 'ngu_van', 'gdcd']
+    const chartData: Record<string, { excellent: number; good: number; average: number; poor: number }> = {}
+
+    for (const subject of subjects) {
+      const qb = this.resultRepository.createQueryBuilder('result')
+
+      const [excellent, good, average, poor] = await Promise.all([
+        qb.where(`result.${subject} >= 8`).getCount(),
+        qb.where(`result.${subject} >= 6 AND result.${subject} < 8`).getCount(),
+        qb.where(`result.${subject} >= 4 AND result.${subject} < 6`).getCount(),
+        qb.where(`result.${subject} < 4`).getCount()
+      ])
+
+      chartData[subject] = {
+        excellent,
+        good,
+        average,
+        poor
+      }
+    }
+
+    return chartData
+  }
+
+  public async getScoreDistributionBySubject(subject: string) {
+    const marks = await this.resultRepository
+      .createQueryBuilder('result')
+      .select(`result.${subject}`, 'score')
+      .where(`result.${subject} IS NOT NULL`)
+      .getRawMany<{ score: number }>()
+
+    const buckets = Array.from({ length: 10 }, (_, i) => {
+      const min = i
+      const max = i + 1
+      return {
+        range: `${min}-${max}`,
+        frequency: 0
+      }
+    })
+
+    for (const { score } of marks) {
+      const index = Math.min(Math.floor(score), 9)
+      buckets[index].frequency++
+    }
+
+    return buckets
+  }
 }
