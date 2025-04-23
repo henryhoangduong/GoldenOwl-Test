@@ -29,8 +29,7 @@ const nameMapping: { [key: string]: string } = {
   sinh_hoc: 'Sinh học',
   lich_su: 'Lịch sử',
   dia_li: 'Địa lí',
-  gdcd: 'Giáo dục công dân',
-  ma_ngoai_ngu: 'Ngoại Ngữ'
+  gdcd: 'Giáo dục công dân'
 }
 
 const SearchScoresPage = () => {
@@ -82,7 +81,7 @@ const SearchScoresPage = () => {
             {Object.entries(results).map(([key, value], index) => {
               const randomColor = Math.floor(Math.random() * colorArrays.length)
               const randomIcon = Math.floor(Math.random() * iconArrays.length)
-              if (key == 'id' || !value) return
+              if (key == 'id' || !value || key == 'ma_ngoai_ngu') return
               return (
                 <ResultCard
                   key={index}

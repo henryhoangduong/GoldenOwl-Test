@@ -16,6 +16,31 @@ const getResultByStudentSBD = async (sbd: string) => {
   } catch (error) {
     console.log(error)
   }
+  return []
 }
 
-export { getResultByStudentSBD }
+const getOverall = async () => {
+  try {
+    const result = await axiosClient.get(`analytic/overall`)
+    if (result) {
+      return result.data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return null
+}
+
+const getBestStudentsGroupA = async () => {
+  try {
+    const result = await axiosClient.get(`analytic/best-students-group-a`)
+    if (result) {
+      return result.data
+    }
+  } catch (error) {
+    console.log(error)
+  }
+  return []
+}
+
+export { getResultByStudentSBD, getOverall, getBestStudentsGroupA }

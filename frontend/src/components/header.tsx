@@ -6,7 +6,7 @@ const Header = () => {
   const nav = useNavigate()
   return (
     <div className='w-full  p-6 shadow-md flex  justify-between'>
-      <SidebarTrigger className='absolute left-0' />
+      <SidebarTrigger className='absolute left-0 top-1' />
       <p
         onClick={() => {
           nav('/')
