@@ -87,4 +87,15 @@ export class AnalyticeService {
 
     return buckets
   }
+  public async getTopStudentBySubject(subject: string, limit: number = 5) {
+    const students = await this.resultRepository
+      .createQueryBuilder('result')
+      .leftJoinAndSelect('result.user', 'user')
+      .where(`result.${subject} IS NOT NULL`)
+      .orderBy(`result.${subject}`, 'DESC')
+      .limit(limit)
+      .getMany()
+
+    return students
+  }
 }
