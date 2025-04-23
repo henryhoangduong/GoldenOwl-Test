@@ -1,26 +1,22 @@
 import { SidebarTrigger } from './ui/sidebar'
 import { AvatarImage, Avatar, AvatarFallback } from './ui/avatar'
-import { BellDot } from 'lucide-react'
-import { useNavigate } from 'react-router-dom'
+import { BellDot, ChevronDown } from 'lucide-react'
 const Header = () => {
-  const nav = useNavigate()
   return (
     <div className='w-full  p-6 shadow-md flex  justify-between'>
       <SidebarTrigger className='absolute left-0 top-1' />
-      <p
-        onClick={() => {
-          nav('/')
-        }}
-        className='text-[#BF9BDE] font-bold text-[36px] cursor-pointer'
-      >
-        GScores
-      </p>
-      <div className='flex flex-row gap-2 items-center'>
-        <Avatar>
-          <AvatarImage src='' />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-        <BellDot size={18} />
+
+      <div className='flex flex-row gap-2 items-center ml-auto'>
+        <div className='flex flex-row items-center justify-center gap-2 cursor-pointer'>
+          <Avatar>
+            <AvatarImage src='' />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+          <p className='text-black font-light text-sm'>User name</p>
+          <ChevronDown size={18} className='text-muted-foreground' />
+        </div>
+
+        <BellDot size={18} className='text-muted-foreground cursor-pointer ml-5' />
       </div>
     </div>
   )

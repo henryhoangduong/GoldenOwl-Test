@@ -36,7 +36,7 @@ const DashboardPage = () => {
       <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 p-6'>
         <Card>
           <CardHeader className='pb-2'>
-            <CardDescription>Tổng học sinh</CardDescription>
+            <CardDescription>🚀 Tổng học sinh</CardDescription>
             <CardTitle className='text-4xl'>
               {' '}
               <CountUp preserveValue redraw={false} end={parseInt(overallData.hocsinh)} decimal='2' />
@@ -45,7 +45,7 @@ const DashboardPage = () => {
         </Card>
         <Card>
           <CardHeader className='pb-2'>
-            <CardDescription>Số môn học</CardDescription>
+            <CardDescription>🎯 Số môn học</CardDescription>
             <CardTitle className='text-4xl'>
               <CountUp preserveValue redraw={false} end={parseInt(overallData.soMon)} decimal='2' />
             </CardTitle>
@@ -55,7 +55,7 @@ const DashboardPage = () => {
       <div className='p-6'>
         <Card className='col-span-2 lg:col-span-3 xl:col-span-4'>
           <CardHeader>
-            <CardTitle>Top học sinh khối A</CardTitle>
+            <CardTitle>☝ Top học sinh khối A</CardTitle>
             <CardDescription>Xếp hạng các học sinh có điểm cao nhất khối A</CardDescription>
           </CardHeader>
           <CardContent>
