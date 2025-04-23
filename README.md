@@ -1,13 +1,19 @@
 # 🧑‍💻 Web Developer Intern Assignment
 
+### 🔗 Demo Link  
+[Live Demo](https://your-demo-link.com) — Check out the live version of the project!
+
+<br/>
+
 ## 👀 Preview
 <div align="center">
   <img src="https://github.com/user-attachments/assets/5fc45f75-9cf2-464d-a7d5-e72e6fc9b6da" width="40%"/>
   <img src="https://github.com/user-attachments/assets/3209f708-c2d0-4802-9691-390dbec01a33" width="40%"/>
     <img src="https://github.com/user-attachments/assets/a4a0acca-b9cc-4afc-96de-ec8c2850a4df" width="40%"/>
-      <img src="https://github.com/user-attachments/assets/51c737b4-ea1d-44bc-993d-c600b6a73b01" height="40%"/>
+      <img src="https://github.com/user-attachments/assets/51c737b4-ea1d-44bc-993d-c600b6a73b01" width="20%"/>
+        <img src="https://github.com/user-attachments/assets/6f138e3c-60ee-47db-925d-64b488c3a919" width="20%"/>
 </div>
---
+
 ## 🧠 Project structure
 This project is divided into two main parts: `frontend` and `backend`.
 
