@@ -1,7 +1,7 @@
 # 🧑‍💻 Web Developer Intern Assignment
 
 ### 🔗 Demo Link  
-[Live Demo](https://your-demo-link.com) — Check out the live version of the project!
+[Live Demo](https://golden-owl-test.vercel.app/) — Check out the live version of the project!
 
 <br/>
 
